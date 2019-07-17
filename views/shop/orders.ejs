@@ -1,0 +1,65 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+    
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+
+
+        <div class="px-4 px-lg-0 mt-5">
+             <div class="pb-5">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+              
+                        <!-- Shopping cart table -->
+                        <div class="table-responsive">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                    <% if (orders.length > 0) { %>
+                                        <% orders.forEach(order => { %>
+                                <th scope="col" colspan="2" class="border-0 bg-light ">
+                                    <button class="btn btn-lg btn-primary btn-block text-left text-uppercase mt-2" >Order - # <%= order._id %></button>
+                                </th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                                    <% order.products.forEach(p => { %>
+                                       
+                              <tr>
+                                <th scope="row" class="border-0">
+                                  <div class="p-2">
+                                    <img src="<%= p.product.imageUrl %>" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                    <div class="ml-3 d-inline-block align-middle">
+                                      <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle"><%= p.product.title %></a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
+                                    </div>
+                                  </div>
+                                </th>
+                                <td class="border-0 align-middle"><strong><%= p.product.price %></strong></td>
+                                
+                               
+                              </tr>
+                              <% }); %>
+                              <% }) %>
+                              
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- End -->
+                      </div>
+                    </div>
+              
+                   
+                    <% } else { %>
+                      <table class="table">
+                        <thead><th><h1>No Products in Cart!</h1></th></thead>
+                      </table>
+                      
+                  <% } %>  
+                  </div>
+                </div>
+              </div>
+        
+        <%- include('../includes/end.ejs') %>

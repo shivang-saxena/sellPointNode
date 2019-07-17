@@ -1,0 +1,168 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <% if (!isAuthenticated) { %>
+   <!-- Login Modal -->
+ <div class="modal fade left" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content container">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Login Now</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form onsubmit="return postLogin()">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Email <b style="color: red"> *</b> </label>
+              <input type="email" class="form-control" id="idEmailLogin" placeholder="Enter Email Id" required>
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Password<b style="color: red"> *</b> </label>
+              <input type="password" class="form-control" id="idPasswordLogin" placeholder="Enter Password" required>
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="csrfToken">
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+          </form>
+            <hr class="my-4">
+            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+            <small style="display: flex;justify-content: center">or</small>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="$('#loginModal').modal('hide')" data-toggle="modal" data-target="#signupModal"><i class="fas fa-envelope mr-2"></i> Register with Email</button>
+          </form>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!-- close Login Modal -->
+        <!-- Signup Modal -->
+  <div class="modal fade left" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content container">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Register Yourself</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form onsubmit="return postSignup()">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Username <b style="color: red"> *</b> </label>
+              <input type="text" class="form-control" id="idUsernameSignup" placeholder="Enter UserName" required>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Email <b style="color: red"> *</b> </label>
+                <input type="email" class="form-control" id="idEmailSignup" placeholder="Enter Email Id" required>
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Password<b style="color: red"> *</b> </label>
+              <input type="password" class="form-control" id="idPasswordSignup" placeholder="Enter Password" required>
+            </div>
+            
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+
+                </form>
+         </div>
+        
+      </div>
+    </div>
+  </div>
+  
+      <% } %>    
+
+
+      <header>
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <!-- Slide One - Set the background image for this slide in the line below -->
+              <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/RCAhiGJsUUE/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                  <h3 class="display-4">First Slide</h3>
+                  <p class="lead">This is a description for the first slide.</p>
+                </div>
+              </div>
+              <!-- Slide Two - Set the background image for this slide in the line below -->
+              <div class="carousel-item" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                  <h3 class="display-4">Second Slide</h3>
+                  <p class="lead">This is a description for the second slide.</p>
+                </div>
+              </div>
+              <!-- Slide Three - Set the background image for this slide in the line below -->
+              <div class="carousel-item" style="background-image: url('https://source.unsplash.com/O7fzqFEfLlo/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                  <h3 class="display-4">Third Slide</h3>
+                  <p class="lead">This is a description for the third slide.</p>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+          </div>
+        </header>
+        
+        <!-- Page Content -->
+        <div class="container">
+        
+          <!-- Page Heading -->
+          <h1 class="my-4">
+            <small>Recommended Post</small>
+          </h1>
+        
+          <div class="row">
+              <% if (prods.length > 0) { %>
+                <% for (let product of prods) { %>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4"  *ngFor="let products of data">
+                <a class="nav-link" href="/products/<%= product._id %>">
+              <div class="card h-100">
+                <div class="card-image"  style="background-image: url('<%= product.imageUrl %>')"></div>
+                <div class="card-body" >
+                  <h5 class="card-title">Rs.<%= product.price %></h5>
+                  <p class="card-text"><%= product.title %></p>
+                  <p class="card-text"><small class="text-muted"><%= product.location %></small><small class="text-muted float-right"><%= product.updatedAt.toDateString() %></small></p>
+                </div>
+              </div>
+            </a>
+            </div>
+            <% } %>
+            <% } else { %>
+              <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                <h1>No Products Found!</h1>
+              </div>
+            <% } %>
+            </div>
+          <!-- /.row -->
+        
+          <!-- Pagination -->
+          <ul class="pagination justify-content-center">
+            <li>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">LOAD MORE</button>
+            </li>
+          </ul>
+        
+        </div>
+        
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+          <div class="container text-center">
+            <small>Copyright &copy; Your Website</small>
+          </div>
+        </footer>
+        <!-- /.container -->
+
+    

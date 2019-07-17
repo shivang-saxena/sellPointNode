@@ -1,0 +1,83 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+    
+  
+   <section class="testimonial py-5" id="testimonial">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-4 py-5 bg-primary text-white text-center ">
+                <div class=" ">
+                    <div class="card-body">
+                        <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
+                        <h2 class="py-3"><% if (editing) { %>Update Ad details<% } else { %>Post Your Ad<% } %></h2>
+                        <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel.
+
+</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 py-5 border">
+                <h4 class="pb-4">Please fill with your details</h4>
+                <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <input id="title" name="fullname" placeholder="Full Name" class="form-control" type="text" value="<% if (editing) { %><%= product.fullname %><% } %>">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input id="title" name="title" placeholder="Ad title" class="form-control" type="text" value="<% if (editing) { %><%= product.title %><% } %>">
+                          </div>
+                         
+                      </div>
+                      <div class="form-row">
+                            <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="Brand" value="<% if (editing) { %><%= product.editing %><% } %>">
+                                  </div> 
+                            <div class="form-group col-md-6">
+                                <input id="" name="price" placeholder="Set a price Range" class="form-control" required="required" type="text" value="<% if (editing) { %><%= product.price %><% } %>">
+                            </div>
+                        </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="number" class="form-control" id="number" name="mobile" placeholder="Mobile"  value="<% if (editing) { %><%= product.mobile %><% } %>">
+                          </div>
+                        <div class="form-group col-md-6">
+                                <input id="" name="location" placeholder="Add Location" class="form-control" required="required" type="text" value="<% if (editing) { %><%= product.location %><% } %>">                            </div>
+                        <div class="form-group col-md-12">
+                                  <textarea id="comment" name="description" cols="40" rows="5" class="form-control" placeholder="Description about your Ad"  value="<% if (editing) { %><%= product.description %><% } %>"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <input type="text" class="form-control" name="imageUrl" id="inputEmail4" placeholder="ImageUrl"  value="<% if (editing) { %><%= product.imageUrl %><% } %>">
+                            </div>
+                          </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                  <label class="form-check-label" for="invalidCheck2">
+                                    <small>By clicking Submit, you agree to our Terms & Conditions, Visitor Agreement and Privacy Policy.</small>
+                                  </label>
+                                </div>
+                              </div>
+                    
+                          </div>
+                    </div>
+                    <% if (editing) { %>
+                        <input type="hidden" value="<%= product._id %>" name="productId">
+                    <% } %>
+        
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <div class="form-row">
+                            <button type="submit" class="btn btn-primary" ><% if (editing) { %>Update Ad<% } else { %>Post Ad<% } %></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('../includes/end.ejs') %>

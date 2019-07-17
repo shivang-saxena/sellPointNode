@@ -1,0 +1,95 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <!-- Page Content -->
+<div class="container">
+
+  <!-- Portfolio Item Heading -->
+  <h1 class="my-4">Page Heading
+    <small>Secondary Text</small>
+  </h1>
+
+  <!-- Portfolio Item Row -->
+  <div class="row">
+
+    <div class="col-md-8">
+      <img class="img-fluid" src="<%= product.imageUrl%>" alt="">
+      <div class="card mt-2">
+          <div class="card-body">
+              <h5 class="card-title"><b>Ad Description</b></h5>
+              <h6 class="card-title"><b>Brand</b> - Brand</h5>
+             <p class="card-text"><%= product.description %></p>
+            
+          </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h1 ><b>Rs. <%= product.price%></b></h5>
+          <p class="card-text"><%= product.title%></p>
+          <p class="card-text"><small class="text-muted"><%= product.location%></small><small class="text-muted float-right"><%= product.updatedAt.toDateString() %></small></p>
+          <% if (isAuthenticated) { %>
+            <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="card mt-2">
+        <div class="card-body">
+            <h5 class="card-title">Seller Details</h5>
+            <div class="d-flex justify-content-between">
+          <div class="avatar-image"  style="background-image: url('https://i.imgur.com/Szjp2So.jpg')"></div>
+          <p class="card-text"><h4><b><%= product.fullname%></b></h3></p>
+          </div>
+          <% if (isAuthenticated) { %>
+          <button class="btn btn-lg btn-primary btn-block text-uppercase mt-2" ><i class="fas fa-phone mr-2"></i><%= product.mobile%></button>
+          <% } else { %>
+            <button class="btn btn-sm btn-primary btn-block text-uppercase mt-2" >Login to get number</button>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+  <!-- Related Projects Row -->
+  <h3 class="my-4">Recommended Ad</h3>
+
+  <div class="row">
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->
+<%- include('../includes/end.ejs') %>
