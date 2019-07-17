@@ -1,10 +1,14 @@
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
+  var category=[
+    "Cars","Jobs","Electronics & Appliances","Mobiles","Books, Sports & Hobbies","Fashion","Properties","Pets"
+  ];
   res.render('admin/edit-product', {
+    category:category,
     pageTitle: 'Add Course',
     path: '/admin/edit-product',
-    editing: false
+    editing: false,
   });
 };
 
@@ -14,17 +18,21 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const fullname = req.body.fullname;
+  //const fullname = req.body.fullname;
   const location = req.body.location;
   const mobile = req.body.mobile;
+  const category = req.body.category;
+  const brand = req.body.brand;
   const product = new Product({
-    fullname:fullname,
+    username:req.user.username,
     title: title,
     mobile: mobile,
     location:location,
     price: price,
     description: description,
     imageUrl: imageUrl,
+    category:category,
+    brand:brand,
     userId: req.user
   });
   product
@@ -40,6 +48,9 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getEditProduct = (req, res, next) => {
+  var category=[
+    "Cars","Jobs","Electronics & Appliances","Mobiles","Books, Sports & Hobbies","Fashion","Properties","Pets"
+  ];
   const editMode = req.query.edit;
   if (!editMode) {
     return res.redirect('/');
@@ -54,7 +65,8 @@ exports.getEditProduct = (req, res, next) => {
         pageTitle: 'Edit Course',
         path: '/admin/edit-product',
         editing: editMode,
-        product: product
+        product: product,
+        category:category
       });
     })
     .catch(err => console.log(err));
@@ -62,13 +74,15 @@ exports.getEditProduct = (req, res, next) => {
 
 exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  const updatedFullName = req.body.fullname;
+  const updatedusername = req.user.username;
   const updatedTitle = req.body.title;
   const updatedPrice = req.body.price;
   const updatedImageUrl = req.body.imageUrl;
   const updatedDesc = req.body.description;
   const updatedmobile = req.body.mobile;
   const updatedlocation = req.body.location;
+  const updatedcategory = req.body.category;
+  const updatedbrand = req.body.brand;
 
 
   Product.findById(prodId)
@@ -77,9 +91,11 @@ exports.postEditProduct = (req, res, next) => {
       product.price = updatedPrice;
       product.description = updatedDesc;
       product.imageUrl = updatedImageUrl;
-      product.fullname = updatedFullName;
+      product.username = updatedusername;
       product.mobile = updatedmobile;
       product.location = updatedlocation;
+      product.brand=updatedbrand;
+      product.category=updatedcategory
 
       return product.save();
     })

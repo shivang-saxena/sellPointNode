@@ -24,20 +24,29 @@
                 <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                          <input id="title" name="fullname" placeholder="Full Name" class="form-control" type="text" value="<% if (editing) { %><%= product.fullname %><% } %>">
-                        </div>
-                        <div class="form-group col-md-6">
                             <input id="title" name="title" placeholder="Ad title" class="form-control" type="text" value="<% if (editing) { %><%= product.title %><% } %>">
                           </div>
+                          <div class="form-group col-md-6">
+                                <input id="" name="price" placeholder="Set a price Range" class="form-control" required="required" type="text" value="<% if (editing) { %><%= product.price %><% } %>">
+                            </div>
                          
                       </div>
                       <div class="form-row">
                             <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="Brand" value="<% if (editing) { %><%= product.editing %><% } %>">
-                                  </div> 
+                                    <select id="inputState" class="form-control" name="category">
+                                            <option>Choose Category</option>
+                                            <% category.forEach(i => { %>
+                                                <% if( editing && i==product.category){ %>
+                                                <option selected><%= i %></option>
+                                                <% } else {%>
+                                                    <option ><%= i %></option>
+                                            <% } %>
+                                            <% }) %>
+                                          </select>
+                                </div>
                             <div class="form-group col-md-6">
-                                <input id="" name="price" placeholder="Set a price Range" class="form-control" required="required" type="text" value="<% if (editing) { %><%= product.price %><% } %>">
-                            </div>
+                                    <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="Brand" value="<% if (editing) { %><%= product.brand %><% } %>">
+                                  </div> 
                         </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -46,7 +55,7 @@
                         <div class="form-group col-md-6">
                                 <input id="" name="location" placeholder="Add Location" class="form-control" required="required" type="text" value="<% if (editing) { %><%= product.location %><% } %>">                            </div>
                         <div class="form-group col-md-12">
-                                  <textarea id="comment" name="description" cols="40" rows="5" class="form-control" placeholder="Description about your Ad"  value="<% if (editing) { %><%= product.description %><% } %>"></textarea>
+                                  <textarea id="comment" name="description" cols="40" rows="5" class="form-control" placeholder="Description about your Ad" ><% if (editing) { %><%= product.description %><% } %></textarea>
                         </div>
                     </div>
                     <div class="form-row">

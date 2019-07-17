@@ -129,13 +129,16 @@
               <% if (prods.length > 0) { %>
                 <% for (let product of prods) { %>
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4"  *ngFor="let products of data">
-                <a class="nav-link" href="/products/<%= product._id %>">
+                <a href="/products/<%= product._id %>">
               <div class="card h-100">
+                  <span class="badge badge-warning notify-badge"><%= product.category %></span>
                 <div class="card-image"  style="background-image: url('<%= product.imageUrl %>')"></div>
                 <div class="card-body" >
-                  <h5 class="card-title">Rs.<%= product.price %></h5>
+                  <h4 class="card-title"><b>Rs.<%= product.price %></b></h5>
                   <p class="card-text"><%= product.title %></p>
-                  <p class="card-text"><small class="text-muted"><%= product.location %></small><small class="text-muted float-right"><%= product.updatedAt.toDateString() %></small></p>
+                  <p class="card-text d-flex justify-content-between">
+                    <small class="text-muted"><%= product.location %></small>
+                    <small class="text-muted"><%= product.updatedAt.toDateString() %></small></p>
                 </div>
               </div>
             </a>

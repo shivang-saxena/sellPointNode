@@ -15,12 +15,13 @@
   <!-- Portfolio Item Row -->
   <div class="row">
 
-    <div class="col-md-8">
+    <div class="col-md-8 badge-item">
+        <span class="badge badge-warning notify-badge"><%= product.category %></span>
       <img class="img-fluid" src="<%= product.imageUrl%>" alt="">
       <div class="card mt-2">
           <div class="card-body">
               <h5 class="card-title"><b>Ad Description</b></h5>
-              <h6 class="card-title"><b>Brand</b> - Brand</h5>
+              <h6 class="card-title"><b>Brand</b> - <%= product.brand %></h5>
              <p class="card-text"><%= product.description %></p>
             
           </div>
@@ -44,7 +45,7 @@
             <h5 class="card-title">Seller Details</h5>
             <div class="d-flex justify-content-between">
           <div class="avatar-image"  style="background-image: url('https://i.imgur.com/Szjp2So.jpg')"></div>
-          <p class="card-text"><h4><b><%= product.fullname%></b></h3></p>
+          <p class="card-text"><h4><b><%= product.username%></b></h3></p>
           </div>
           <% if (isAuthenticated) { %>
           <button class="btn btn-lg btn-primary btn-block text-uppercase mt-2" ><i class="fas fa-phone mr-2"></i><%= product.mobile%></button>
