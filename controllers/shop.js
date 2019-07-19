@@ -43,6 +43,19 @@ exports.getProduct = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
+exports.getCategoryProduct = (req, res, next) => {
+  const slug = req.params.categoryslug;
+  Product.find({category:slug})
+    .then(product => {
+      res.render('shop/category', {
+        CatProducts: product,
+        pageTitle: product.title,
+        path: 'shop/caegory'
+      });
+    })
+    .catch(err => console.log(err));
+};
+
 exports.getIndex = (req, res, next) => {
   Product.find()
     .then(products => {
@@ -62,6 +75,7 @@ exports.getCart = (req, res, next) => {
     .populate('cart.items.productId')
     .execPopulate()
     .then(user => {
+      console.log(user.cart);
       const products = user.cart.items;
       res.render('shop/cart', {
         path: '/cart',
@@ -96,6 +110,7 @@ exports.postCartDeleteProduct = (req, res, next) => {
 
 exports.postOrder = (req, res, next) => {
   var order_id="";
+  var total=req.body.total;
   req.user
     .populate('cart.items.productId')
     .execPopulate()
@@ -108,7 +123,8 @@ exports.postOrder = (req, res, next) => {
           email: req.user.email,
           userId: req.user
         },
-        products: products
+        products: products,
+        total:total
       });
        order.save();
        order_id=order._id;

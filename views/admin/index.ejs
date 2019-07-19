@@ -1,0 +1,261 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+        <nav class="navbar navbar-light bg-light">
+                <span class="navbar-brand mb-0 h1 text-center">WELCOME TO ADMIN</span>
+                <ul>                
+                  <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout </a>
+                </li>
+                </ul>
+              </nav>
+    <div class="container py-5">
+        <div class="row">
+      
+         <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+              <h2 class="h6 font-weight-bold text-center mb-4">Total users</h2>
+      
+              <!-- Progress bar 1 -->
+              <div class="progress mx-auto" data-value='80'>
+                <span class="progress-left">
+                              <span class="progress-bar border-primary"></span>
+                </span>
+                <span class="progress-right">
+                              <span class="progress-bar border-primary"></span>
+                </span>
+                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                  <div class="h2 font-weight-bold"><%= users.length %></div>
+                </div>
+              </div>
+              <!-- END -->
+      
+              <!-- Demo info -->
+              <div class="row text-center mt-4">
+                <div class="col-6 border-right">
+                  <div class="h4 font-weight-bold mb-0"><%= (users.length)%7 %></div><span class="small text-gray">Last week</span>
+                </div>
+                <div class="col-6">
+                  <div class="h4 font-weight-bold mb-0">60%</div><span class="small text-gray">Last month</span>
+                </div>
+              </div>
+              <!-- END -->
+            </div>
+          </div>
+      
+          <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+              <h2 class="h6 font-weight-bold text-center mb-4">Total Ads</h2>
+      
+              <!-- Progress bar 2 -->
+              <div class="progress mx-auto" data-value='25'>
+                <span class="progress-left">
+                              <span class="progress-bar border-danger"></span>
+                </span>
+                <span class="progress-right">
+                              <span class="progress-bar border-danger"></span>
+                </span>
+                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                  <div class="h2 font-weight-bold"><%= products.length %></div>
+                </div>
+              </div>
+              <!-- END -->
+      
+              <!-- Demo info-->
+              <div class="row text-center mt-4">
+                <div class="col-6 border-right">
+                  <div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
+                </div>
+                <div class="col-6">
+                  <div class="h4 font-weight-bold mb-0">60%</div><span class="small text-gray">Last month</span>
+                </div>
+              </div>
+              <!-- END -->
+            </div>
+          </div>
+      
+          <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+              <h2 class="h6 font-weight-bold text-center mb-4">total Orders</h2>
+      
+              <!-- Progress bar 3 -->
+              <div class="progress mx-auto" data-value='76'>
+                <span class="progress-left">
+                              <span class="progress-bar border-success"></span>
+                </span>
+                <span class="progress-right">
+                              <span class="progress-bar border-success"></span>
+                </span>
+                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                  <div class="h2 font-weight-bold"><%= orders.length %></div>
+                </div>
+              </div>
+              <!-- END -->
+      
+              <!-- Demo info -->
+              <div class="row text-center mt-4">
+                <div class="col-6 border-right">
+                  <div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
+                </div>
+                <div class="col-6">
+                  <div class="h4 font-weight-bold mb-0">60%</div><span class="small text-gray">Last month</span>
+                </div>
+              </div>
+              <!-- END -->
+            </div>
+          </div>
+      
+          <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+              <h2 class="h6 font-weight-bold text-center mb-4">Total overdue</h2>
+      
+              <!-- Progress bar 4 -->
+              <div class="progress mx-auto" data-value='12'>
+                <span class="progress-left">
+                              <span class="progress-bar border-warning"></span>
+                </span>
+                <span class="progress-right">
+                              <span class="progress-bar border-warning"></span>
+                </span>
+                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                  <div class="h2 font-weight-bold">12<sup class="small">%</sup></div>
+                </div>
+              </div>
+              <!-- END -->
+      
+              <!-- Demo info -->
+              <div class="row text-center mt-4">
+                <div class="col-6 border-right">
+                  <div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
+                </div>
+                <div class="col-6">
+                  <div class="h4 font-weight-bold mb-0">60%</div><span class="small text-gray">Last month</span>
+                </div>
+              </div>
+              <!-- END -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container py-5">
+          <div class="row">
+              <div class="col-md-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Users</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Ads</a>
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Orders</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                  </div>
+              </div>
+              <div class="col-md-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">username</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">cartitems</th>
+                                    <th scope="col">ads</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                        <% if (users.length > 0) { var i=1 %>
+                                            <% for (let user of users) { %>
+                                  <tr>
+                                    <th scope="row"><%= i%></th>
+                                    <td><%= user.username %></td>
+                                    <td><%= user.email %></td>
+                                    <td>10</td>
+                                    <td>10</td>
+                                  </tr>
+                                  <% i++ } %>
+          <% } else { %>
+            <tr><td>No Users</td></tr>
+          <% } %>
+                                </tbody>
+                              </table>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                       
+                        <table class="table table-responsive">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">image</th>
+                                    <th scope="col">ad title</th>
+                                    <th scope="col">location</th>
+                                    <th scope="col">price</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">username</th>
+                                    <th scope="col">action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                        <% if (products.length > 0) { var i=1 %>
+                                            <% for (let product of products) { %>
+                                  <tr>
+                                    <th scope="row"><%= i%></th>
+                                    <td> <div class="avatar-image"  style="background-image: url('<%= product.imageUrl %>')"></div></td>
+                                    <td><%= product.title %></td>
+                                    <td><%= product.location %></td>
+                                    <td><%= product.price %></td>
+                                    <td><%= product.category %></td>
+                                    <td><%= product.username %></td>
+                                    <td>
+                                    <div class="d-flex justify-content-between">
+                                            <a class="btn btn-sm btn-secondary" href="/admin/edit-product/<%= product._id %>?edit=true">Edit</a>
+                                            <form action="/admin/delete-product" method="POST">
+                                                <input type="hidden" value="<%= product._id %>" name="productId">
+                                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                <button class="btn btn-sm" type="submit">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                  </tr>
+                                  <% i++ } %>
+          <% } else { %>
+            <tr><td>No Ads</td></tr>
+          <% } %>
+                                </tbody>
+                              </table>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        
+                        <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">order id</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">total items</th>
+                                    <th scope="col">date</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                        <% if (orders.length > 0) { var i=1 %>
+                                            <% for (let order of orders) { %>
+                                  <tr>
+                                    <th scope="row"><%= i%></th>
+                                    <td>#<%= order._id %></td>
+                                    <td><%= order.user.email %></td>
+                                    <td><%= order.products.length %></td>
+                                    <td><%= order.updatedAt.toDateString() %></td>
+                                  </tr>
+                                  <% i++ } %>
+          <% } else { %>
+            <tr><td>No Orders</td></tr>
+          <% } %>
+                                </tbody>
+                              </table>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    
+  
+  <%- include('../includes/end.ejs') %>

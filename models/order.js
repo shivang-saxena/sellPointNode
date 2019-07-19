@@ -19,7 +19,14 @@ const orderSchema = new Schema({
       required: true,
       ref: 'User'
     }
-  }
+  },
+  total: {
+    type: String,
+    required: true
+  },
+},
+{
+  timestamps: true
 });
 
 module.exports = mongoose.model('Order', orderSchema);

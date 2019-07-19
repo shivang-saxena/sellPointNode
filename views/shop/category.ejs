@@ -1,0 +1,44 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <div class="container">
+        
+        <!-- Page Heading -->
+        <h1 class="my-4">
+          <small>Ads showing category</small>
+        </h1>
+      
+        <div class="row">
+            <% if (CatProducts.length > 0) { %>
+              <% for (let product of CatProducts) { %>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4" >
+                  <a href="/products/<%= product._id %>">
+                <div class="card h-100">
+                    <span class="badge badge-warning notify-badge"><%= product.category %></span>
+                  <div class="card-image"  style="background-image: url('<%= product.imageUrl %>')"></div>
+                  <div class="card-body" >
+                    <h4 class="card-title"><b>Rs.<%= product.price %></b></h5>
+                    <p class="card-text"><%= product.title %></p>
+                    <p class="card-text d-flex justify-content-between">
+                      <small class="text-muted"><%= product.location %></small>
+                      <small class="text-muted"><%= product.updatedAt.toDateString() %></small></p>
+                  </div>
+                </div>
+              </a>
+              </div>
+  
+          <% } %>
+          <% } else { %>
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+              <h1>No Products Found!</h1>
+            </div>
+          <% } %>
+          </div>
+        <!-- /.row -->
+    </div>    
+
+    
+

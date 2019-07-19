@@ -1,8 +1,11 @@
 const Product = require('../models/product');
+const User = require('../models/user');
+const Order = require('../models/order');
+const fileUpload = require('express-fileupload');
 
 exports.getAddProduct = (req, res, next) => {
   var category=[
-    "Cars","Jobs","Electronics & Appliances","Mobiles","Books, Sports & Hobbies","Fashion","Properties","Pets"
+    "Cars","Electronics & Appliances","Mobiles","Books", "Sports","Fashion","Properties","Pets"
   ];
   res.render('admin/edit-product', {
     category:category,
@@ -12,8 +15,76 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 
+exports.getAdminLogin = (req, res, next) => {
+  Product.find()
+    .then(products => {
+      console.log(products);
+      res.render('admin/admin-login', {
+        prods: products,
+        pageTitle: 'All Courses',
+        path: '/admin/admin-login'
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+exports.postAdminLogin = (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  console.log(email+password);
+  User.findOne({ email: email })
+    .then(user => {
+      if (!user) {
+        return res.status(200).json({msg:"User not Registered",isLoggedIn:false});
+      }
+      else{
+        console.log(user.role);
+          if (user.password == password) {
+            req.session.isLoggedIn = true;
+            req.session.user = user;
+            return  req.session.save(err => {
+              console.log(err);
+              res.redirect('/admin/dashboard');
+            });
+          }
+          else{
+          req.flash('error', 'Invalid email or password.');
+          return res.status(200).json({msg:"Invalid email or password",isLoggedIn:false});
+          }
+        }   
+    })
+    .catch(err => console.log(err));
+};
+
+exports.getAdminIndex = (req, res, next) => {
+  Promise.all([
+    User.find({}),
+    Product.find({}),
+    Order.find({})
+   ])
+   .then( ([ allUser,product,order]) => {
+     
+     
+    res.render("admin/index", 
+    {
+      users : allUser ,
+      products:product,
+      orders:order,
+      date : new Date(),
+      pageTitle: 'Admin'
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  });
+};
+
+
+
 exports.postAddProduct = (req, res, next) => {
-  console.log(req.body);
+  console.log(req.files);
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
@@ -35,16 +106,18 @@ exports.postAddProduct = (req, res, next) => {
     brand:brand,
     userId: req.user
   });
-  product
-    .save()
-    .then(result => {
+
+  // product
+  //   .save()
+  //   .then(result => {
       
-      console.log('Created Product');
-      res.redirect('/admin/products');
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  //     console.log('Created Product');
+  //     res.redirect('/admin/products');
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   }); 
+  res.redirect('/admin/products');
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -107,11 +180,10 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.find()
+  Product.find({userId:req.session.user._id})
     // .select('title price -_id')
     // .populate('userId', 'name')
     .then(products => {
-      console.log(products);
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Courses',

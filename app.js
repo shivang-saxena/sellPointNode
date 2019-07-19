@@ -12,7 +12,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 //local url -  'mongodb://localhost:27017/shop';
-//const MONGODB_URI ='mongodb+srv://shivang:7654321@cluster0-x6nld.mongodb.net/highjack?retryWrites=true';
+// const MONGODB_URI ='mongodb+srv://shivang:7654321@cluster0-x6nld.mongodb.net/sellPoint?retryWrites=true';
 const MONGODB_URI = 'mongodb://localhost:27017/sellpoint';
 
 const app = express();
