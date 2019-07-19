@@ -134,7 +134,7 @@ exports.postOrder = (req, res, next) => {
       return req.user.clearCart();
     })
     .then(() => {
-      res.redirect('/orders');
+      
       transporter.sendMail({
         to:req.user.email,
         from:'course@highjack.com',
@@ -144,7 +144,7 @@ exports.postOrder = (req, res, next) => {
        .catch(err =>{
          console.log(err);
        })
-     
+       res.redirect('/orders');
     })
     .catch(err => console.log(err));
 };
