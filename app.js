@@ -7,15 +7,17 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const fileUpload = require('express-fileupload');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 //local url -  'mongodb://localhost:27017/shop';
-// const MONGODB_URI ='mongodb+srv://shivang:7654321@cluster0-x6nld.mongodb.net/sellPoint?retryWrites=true';
-const MONGODB_URI = 'mongodb://localhost:27017/sellpoint';
+const MONGODB_URI ='mongodb+srv://shivang:7654321@cluster0-x6nld.mongodb.net/sellPoint?retryWrites=true';
+// const MONGODB_URI = 'mongodb://localhost:27017/sellpoint';
 
 const app = express();
+app.use(fileUpload());
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions'

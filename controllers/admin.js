@@ -1,7 +1,7 @@
 const Product = require('../models/product');
 const User = require('../models/user');
 const Order = require('../models/order');
-const fileUpload = require('express-fileupload');
+
 
 exports.getAddProduct = (req, res, next) => {
   var category=[
@@ -84,9 +84,15 @@ exports.getAdminIndex = (req, res, next) => {
 
 
 exports.postAddProduct = (req, res, next) => {
-  console.log(req.files);
+  var sampleFile = req.files.foo;
+  var fileName = sampleFile.name;
+  sampleFile.mv('public/images/' + fileName, function(err) {
+    if(err)
+      console.log(err);
+  });
+
   const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
+  const imageUrl = '/images/'+fileName;
   const price = req.body.price;
   const description = req.body.description;
   //const fullname = req.body.fullname;
@@ -94,6 +100,7 @@ exports.postAddProduct = (req, res, next) => {
   const mobile = req.body.mobile;
   const category = req.body.category;
   const brand = req.body.brand;
+  console.log(imageUrl);
   const product = new Product({
     username:req.user.username,
     title: title,
@@ -107,16 +114,16 @@ exports.postAddProduct = (req, res, next) => {
     userId: req.user
   });
 
-  // product
-  //   .save()
-  //   .then(result => {
+  product
+    .save()
+    .then(result => {
       
-  //     console.log('Created Product');
-  //     res.redirect('/admin/products');
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   }); 
+      console.log('Created Product');
+      res.redirect('/admin/products');
+    })
+    .catch(err => {
+      console.log(err);
+    }); 
   res.redirect('/admin/products');
 };
 

@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-8 py-5 border">
                 <h4 class="pb-4">Please fill with your details</h4>
-                <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="post">
+                <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <input id="title" name="title" placeholder="Ad title" class="form-control" type="text" value="<% if (editing) { %><%= product.title %><% } %>">
@@ -60,8 +60,8 @@
                     </div>
                     <div class="form-row">
                             <div class="form-group col-md-12">
-                              <input type="text" class="form-control" name="imageUrl" id="inputEmail4" placeholder="ImageUrl"  value="<% if (editing) { %><%= product.imageUrl %><% } %>">
-                            <!-- <input type="file" class="form-control-file" name="file" multiple>  -->
+                              <!-- <input type="text" class="form-control" name="imageUrl" id="inputEmail4" placeholder="ImageUrl"  value="<% if (editing) { %><%= product.imageUrl %><% } %>"> -->
+                            <input type="file" class="form-control-file" name="foo" multiple> 
                             </div>
                           </div>
                     <div class="form-row">
