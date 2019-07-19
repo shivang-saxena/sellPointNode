@@ -37,11 +37,14 @@
                                     </div>
                                   </div>
                                 </th>
-                                <td class="border-0 align-middle"><strong><%= p.product.price %></strong></td>
-                                
-                               
-                              </tr>
+                                <td class="border-0 align-middle"><%= p.quantity %></td>
+                                <td class="border-0 align-middle">Rs. <%= p.product.price %></td>
+              
+                                 </tr>
+                                 
                               <% }); %>
+                              <tr><td>Total</td>
+                              <td class="border-0 align-middle"><strong>Rs. <%= order.total %></strong></td></tr>
                               <% }) %>
                               
                             </tbody>
